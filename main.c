@@ -4,7 +4,9 @@
 - Gr 1. Listę dwukierunkową, która w elemencie listy zawiera 2 zmienne typu int.
  Lista posiada następujące funkcje do jej obsługi:
 a) dodawanie elementu na końcu listy (1pkt)
-b) usuwanie element. Zakładamy, że jako argument pobieramy wskaźnik na element i usuwamyz listy element zawierający dokłądnie te same dane co element pobrany jako argument (1 pkt)
+b) usuwanie element. Zakładamy, że jako argument pobieramy wskaźnik na element
+i usuwamyz listy element zawierający dokłądnie te same dane co element pobrany
+jako argument (1 pkt)
 c) wyszkuwianie elementu i zwracanie wskaźnika na ten element (1pkt)
 d) dodawanie dwóch list. (1pkt)
 e) szukanie jednej listy w drugiej. Zakładamy, że nasza funkcja przyjmuje 2 wskaźniki na 2 listy i szuka listy drugiej w pierwszej. (1 pkt )
@@ -23,6 +25,15 @@ void add_to_list(struct Node *head, struct Node *to_add) {
     
     last->next = to_add;
     to_add->prev = last;
+}
+
+struct Node *find_in_list(struct Node *head, struct Node *to_find) {
+    struct Node *curr = head;
+    while (curr->next != NULL) {
+        if (curr->value == to_find->value) return curr;
+        curr = curr->next;
+    }
+    return NULL;
 }
 
 void remove_from_list(struct Node *head, struct Node *to_remove) {
@@ -72,6 +83,15 @@ int main () {
     remove_from_list(&first, &(Node) { NULL, NULL, 20 });
     remove_from_list(&first, &(Node) { NULL, NULL, 50 });
     print_list(&first);
+    
+    printf("\nFinding element:\n");
+    struct Node *found = find_in_list(&first, &(Node) {NULL, NULL, 30});
+    printf(
+        "%d, prev: %d, next: %d\n",
+        found->value,
+        found->prev == NULL ? -1 : found->prev->value,
+        found->next == NULL ? -1 : found->next->value
+    );
 
     return 0;
 }
