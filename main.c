@@ -25,6 +25,22 @@ void add_to_list(struct Node *head, struct Node *to_add) {
     to_add->prev = last;
 }
 
+void remove_from_list(struct Node *head, struct Node *to_remove) {
+    struct Node *curr = head;
+
+    while (curr != NULL) {
+        if (curr->value != to_remove->value) {
+            curr = curr->next;
+            continue;
+        }
+        if (curr->next != NULL)
+            curr->next->prev = curr->prev != NULL ? curr->prev : NULL;
+        if (curr->prev != NULL)
+            curr->prev->next = curr->next != NULL ? curr->next : NULL;
+        break;
+    }
+}
+
 void print_list (struct Node *head) {
     struct Node *curr = head;
 
@@ -41,10 +57,20 @@ void print_list (struct Node *head) {
 
 int main () {
     struct Node first = { NULL, NULL, 10 };
+    
+    printf("\nInitial list:\n");
+    print_list(&first);
 
+    printf("\nAdding elements:\n");
     add_to_list(&first, &(Node) {NULL, NULL, 20});
     add_to_list(&first, &(Node) {NULL, NULL, 30});
+    add_to_list(&first, &(Node) {NULL, NULL, 40});
+    add_to_list(&first, &(Node) {NULL, NULL, 50});
+    print_list(&first);
 
+    printf("\nRemoving every second element:\n");
+    remove_from_list(&first, &(Node) { NULL, NULL, 20 });
+    remove_from_list(&first, &(Node) { NULL, NULL, 50 });
     print_list(&first);
 
     return 0;
