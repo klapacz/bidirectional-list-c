@@ -1,6 +1,51 @@
 #include "stdio.h"
 
+/*
+- Gr 1. Listę dwukierunkową, która w elemencie listy zawiera 2 zmienne typu int.
+ Lista posiada następujące funkcje do jej obsługi:
+a) dodawanie elementu na końcu listy (1pkt)
+b) usuwanie element. Zakładamy, że jako argument pobieramy wskaźnik na element i usuwamyz listy element zawierający dokłądnie te same dane co element pobrany jako argument (1 pkt)
+c) wyszkuwianie elementu i zwracanie wskaźnika na ten element (1pkt)
+d) dodawanie dwóch list. (1pkt)
+e) szukanie jednej listy w drugiej. Zakładamy, że nasza funkcja przyjmuje 2 wskaźniki na 2 listy i szuka listy drugiej w pierwszej. (1 pkt )
+*/
+
+typedef struct Node {
+    struct Node *next;
+    struct Node *prev;
+    
+    int value;
+} Node;
+
+void add_to_list(struct Node *head, struct Node *to_add) {
+    struct Node *last = head;
+    while (last->next != NULL) last = last->next;
+    
+    last->next = to_add;
+    to_add->prev = last;
+}
+
+void print_list (struct Node *head) {
+    struct Node *curr = head;
+
+    while (curr != NULL) {
+        printf(
+            "%d, prev: %d, next: %d\n",
+            curr->value,
+            curr->prev == NULL ? -1 : curr->prev->value,
+            curr->next == NULL ? -1 : curr->next->value
+        );
+        curr = curr->next;
+    }
+}
+
 int main () {
-    printf("%s", "Hello world!");
+    struct Node first = { NULL, NULL, 10 };
+
+    add_to_list(&first, &(Node) {NULL, NULL, 20});
+    add_to_list(&first, &(Node) {NULL, NULL, 30});
+
+    print_list(&first);
+
     return 0;
 }
