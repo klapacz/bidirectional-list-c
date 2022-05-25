@@ -1,17 +1,5 @@
 #include "stdio.h"
 
-/*
-- Gr 1. Listę dwukierunkową, która w elemencie listy zawiera 2 zmienne typu int.
- Lista posiada następujące funkcje do jej obsługi:
-a) dodawanie elementu na końcu listy (1pkt)
-b) usuwanie element. Zakładamy, że jako argument pobieramy wskaźnik na element
-i usuwamyz listy element zawierający dokłądnie te same dane co element pobrany
-jako argument (1 pkt)
-c) wyszkuwianie elementu i zwracanie wskaźnika na ten element (1pkt)
-d) dodawanie dwóch list. (1pkt)
-e) szukanie jednej listy w drugiej. Zakładamy, że nasza funkcja przyjmuje 2 wskaźniki na 2 listy i szuka listy drugiej w pierwszej. (1 pkt )
-*/
-
 typedef struct Node {
     struct Node *next;
     struct Node *prev;
